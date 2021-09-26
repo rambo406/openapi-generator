@@ -7,7 +7,7 @@ class ApiKeyAuthInterceptor extends AuthInterceptor {
     Map<String, String> apiKeys = {};
 
     @override
-    Future<dynamic> onRequest(RequestOptions options) {
+    Future<void> onRequest(RequestOptions options, RequestInterceptorHandler handler) async {
         final authInfo = getAuthInfo(options, 'apiKey');
         for (final info in authInfo) {
             final authName = info['name'] as String;
@@ -22,6 +22,6 @@ class ApiKeyAuthInterceptor extends AuthInterceptor {
                 }
             }
         }
-        return super.onRequest(options);
+    await super.onRequest(options, handler);
     }
 }

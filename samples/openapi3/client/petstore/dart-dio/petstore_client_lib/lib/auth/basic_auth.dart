@@ -21,7 +21,7 @@ class BasicAuthInterceptor extends AuthInterceptor {
     Map<String, BasicAuthInfo> authInfo = {};
 
     @override
-    Future<dynamic> onRequest(RequestOptions options) {
+    Future<void> onRequest(RequestOptions options, RequestInterceptorHandler handler) async {
         final metadataAuthInfo = getAuthInfo(options, 'basic');
         for (final info in metadataAuthInfo) {
             final authName = info['name'] as String;
@@ -33,6 +33,6 @@ class BasicAuthInterceptor extends AuthInterceptor {
             }
         }
 
-        return super.onRequest(options);
+    await super.onRequest(options, handler);
     }
 }

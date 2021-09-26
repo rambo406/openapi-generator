@@ -13,7 +13,7 @@ class OAuthInterceptor extends AuthInterceptor {
     Map<String, String> tokens = {};
 
     @override
-    Future<dynamic> onRequest(RequestOptions options) {
+    Future<void> onRequest(RequestOptions options, RequestInterceptorHandler handler) async {
         final authInfo = getAuthInfo(options, 'oauth');
         for (final info in authInfo) {
             final token = tokens[info['name']];
@@ -22,6 +22,6 @@ class OAuthInterceptor extends AuthInterceptor {
                 break;
             }
         }
-        return super.onRequest(options);
+    await super.onRequest(options, handler);
     }
 }
